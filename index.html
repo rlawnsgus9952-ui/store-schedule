@@ -37,12 +37,14 @@
     --peanut:#FF8A5C;
   }
 
-  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent; min-width:0;}
   html,body{
     margin:0; padding:0; background:var(--bg); color:var(--text);
     font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Pretendard", "Apple SD Gothic Neo", sans-serif;
     -webkit-font-smoothing:antialiased;
     overscroll-behavior-y: none;
+    overflow-x:hidden;
+    width:100%;
   }
   #app{
     max-width:520px; margin:0 auto;
@@ -128,12 +130,14 @@
   .weekdays span:last-child{ color:#5B8CFF; }
 
   .calendar{
-    display:grid; grid-template-columns:repeat(7,1fr);
+    display:grid; grid-template-columns:repeat(7, minmax(0,1fr));
     gap:5px;
     background:var(--surface);
     border:1px solid var(--line);
     border-radius:16px;
     padding:8px;
+    width:100%;
+    overflow:hidden;
   }
 
   .day{
@@ -156,12 +160,13 @@
   }
   .day.pad .rows, .day.empty .rows{ display:none; }
 
-  .rows{ display:flex; flex-direction:column; gap:2px; flex:1; justify-content:flex-end; }
+  .rows{ display:flex; flex-direction:column; gap:2px; flex:1; justify-content:flex-end; min-width:0; }
   .prow{
     display:flex; align-items:center; gap:3px;
     border-radius:4px; padding:1px 3px;
     font-size:8.6px; font-weight:800; line-height:1.5;
     font-variant-numeric: tabular-nums;
+    overflow:hidden; white-space:nowrap; min-width:0;
   }
   .prow .init{ opacity:.85; }
   .prow.am{ background:color-mix(in srgb, var(--am) 24%, transparent); color:var(--am); }
