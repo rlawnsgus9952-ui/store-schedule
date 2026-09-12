@@ -11,8 +11,8 @@
 <meta name="apple-mobile-web-app-title" content="근무표">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#0D1117">
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAIAAAB7GkOtAAAMyklEQVR4nO3dP6tl13nA4TNCGMUwxVTjKgipNsJVSJ1KOBD0CdwZjCuDWlduBa6MwZ0/gQjEqEptUgWRWkKksr6AI1IYFwfG47kzd86ffc7aa/2epxTSPS/svd/fWXs03CdPnz0/ANDzzugBABhDAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACiBAAgSgAAogQAIEoAAKIEACBKAACi3h09AG/0vX/9r1Ef/f//8U+jPvrf/uFXoz763//vl6M+GoYQgN0ZuPcfznC3Egzc+w9nUAIivALalz1s/5fdZ549bP+X7W0euBEngL3Y2+p/4TjYjY4Cu121x8EcBVibE8Au7Hb7v3CLCXe7/V/Y/4RwDQEYb//b/2jbOWfZrbPMCRcQAICoJ0+fPR89w8a++fqr0SOc4b0vPho9wnm++/jL63/IJ59+e/0PuafPP9vgMXnn5z+9/ofc019+87vRI+zO+x98OHqELTkBjDTd9j9sMfN02/+wxczTbf/DnDNzFgEAiBIAgCgBGGbG9z9H10w+4/ufo2smn/ddyryTcwoBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBKAYb77+MvRI1zomsm/++z5hpPc0zWT/+U3v9twknuad3JOIQAAUQIAECUAI834Fuj6mWd8C3T9zDO+S5lxZs4iAIPN1YCtpp2rAVtNO9c+nWtaLiMAAFECMN4sh4Bt55zlELDtnLN8rZ5lTq4kALuw/wbcYsL9N+AWE+5/t+5/QrZy78+/PHYA/hcTggd8f2wwewAAAABJRU5ErkJggg==" type="image/png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect width='120' height='120' rx='26' fill='%230D1117'/%3E%3Crect x='14' y='50' width='34' height='34' rx='8' fill='%23F5A623'/%3E%3Crect x='50' y='50' width='34' height='34' rx='8' fill='%233E63DD'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
 
 <style>
   :root{
@@ -53,7 +53,6 @@
     display:flex; flex-direction:column; gap:14px;
   }
 
-  /* ---------- Header ---------- */
   header{ display:flex; flex-direction:column; gap:4px; }
   .eyebrow{ font-size:12.5px; color:var(--muted); letter-spacing:.02em; }
   h1{
@@ -66,7 +65,6 @@
     transform: translateY(-3px);
   }
 
-  /* ---------- Tabs ---------- */
   .tabs{
     display:flex; background:var(--surface); border:1px solid var(--line);
     border-radius:12px; padding:3px; gap:3px; margin-top:6px;
@@ -98,7 +96,6 @@
   .person-picker button[data-person="joker"] .en{ color:var(--joker); }
   .person-picker button[data-person="peanut"] .en{ color:var(--peanut); }
 
-  /* ---------- Month nav ---------- */
   .month-nav{
     display:flex; align-items:center; justify-content:space-between;
     padding:2px 2px;
@@ -113,7 +110,6 @@
     font-size:16.5px; font-weight:800; font-variant-numeric:tabular-nums;
   }
 
-  /* ---------- Legend ---------- */
   .legend{ display:flex; gap:14px; font-size:11.5px; color:var(--muted); padding:0 2px; }
   .legend span{ display:flex; align-items:center; gap:5px; }
   .dot{ width:9px; height:9px; border-radius:3px; display:inline-block; }
@@ -121,7 +117,6 @@
   .dot.pm{ background:var(--pm); }
   .dot.off{ background:var(--off); }
 
-  /* ---------- Calendar ---------- */
   .weekdays{
     display:grid; grid-template-columns:repeat(7,1fr);
     font-size:11.5px; color:var(--muted); text-align:center; padding:0 1px;
@@ -149,6 +144,7 @@
     display:flex; flex-direction:column; gap:3px;
     border:1px solid transparent;
   }
+  .calendar.mode-all .day{ aspect-ratio: 1 / 1.62; padding:4px 3px 3px; }
   .day.pad{ background:transparent; }
   .day.pad .date-num{ color:var(--faint); }
   .day.empty .date-num{ color:var(--faint); }
@@ -160,20 +156,22 @@
   }
   .day.pad .rows, .day.empty .rows{ display:none; }
 
-  .rows{ display:flex; flex-direction:column; gap:2px; flex:1; justify-content:flex-end; min-width:0; }
+  .rows{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
   .prow{
-    display:flex; align-items:center; gap:3px;
-    border-radius:4px; padding:1px 3px;
-    font-size:8.6px; font-weight:800; line-height:1.5;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    border-radius:6px;
     font-variant-numeric: tabular-nums;
-    overflow:hidden; white-space:nowrap; min-width:0;
+    overflow:hidden; min-width:0;
+    flex:1;
+    line-height:1.05;
   }
-  .prow .init{ opacity:.85; }
-  .prow.am{ background:color-mix(in srgb, var(--am) 24%, transparent); color:var(--am); }
-  .prow.pm{ background:color-mix(in srgb, var(--pm) 26%, transparent); color:#9DB2FF; }
-  .prow.off{ background:color-mix(in srgb, var(--off) 22%, transparent); color:#FF9C9C; }
+  .prow .init{ font-size:11.5px; font-weight:800; }
+  .prow .time{ font-size:7px; font-weight:700; opacity:.82; white-space:nowrap; }
+  .prow.am{ background:var(--am); color:var(--am-ink); }
+  .prow.pm{ background:var(--pm); color:var(--pm-ink); }
+  .prow.off{ background:var(--off); color:#FFE9E9; }
+  @media (max-width:340px){ .prow .init{ font-size:10px; } .prow .time{ font-size:6.2px; } }
 
-  /* ---------- Mine view ---------- */
   .day.mine-am{ background:var(--am); border-color:var(--am); }
   .day.mine-pm{ background:var(--pm); border-color:var(--pm); }
   .day.mine-off{ background:var(--off); border-color:var(--off); }
@@ -188,7 +186,6 @@
   .day.mine-pm .mine-label{ color:var(--pm-ink); }
   .day.mine-off .mine-label{ color:#FFE1E1; }
 
-  /* ---------- Footer / install tip ---------- */
   .note{
     font-size:12px; color:var(--muted); text-align:center; padding:2px 8px;
   }
@@ -206,9 +203,6 @@
   .install-tip ol{ margin:10px 0 2px; padding-left:18px; font-size:12.5px; color:var(--muted); line-height:1.7; }
   .install-tip b{ color:var(--text); }
 
-  @media (max-width:340px){
-    .prow{ font-size:8px; }
-  }
 </style>
 </head>
 <body>
@@ -264,8 +258,6 @@
 (function(){
   "use strict";
 
-  // ---------- 근무 데이터 ----------
-  // 9/20 ~ 10/10 : 이미지 원본 그대로 하드코딩 (10/1은 근무 조정으로 3명 모두 휴무)
   var HARD = {
     "2026-09-20":{peanut:"pm",max:"am",joker:"off"},
     "2026-09-21":{peanut:"pm",max:"am",joker:"off"},
@@ -290,15 +282,14 @@
     "2026-10-10":{peanut:"off",max:"am",joker:"pm"}
   };
 
-  // 10/11부터 확정된 "4근무-2휴무-4근무(반대타임)-2휴무" 12일 주기를 계속 반복
-  var ANCHOR = new Date(2026,9,11); // 2026-10-11
+  var ANCHOR = new Date(2026,9,11);
   var CYCLE = {
     peanut: ["am","am","am","am","off","off","pm","pm","pm","pm","off","off"],
     max:    ["off","off","pm","pm","pm","pm","off","off","am","am","am","am"],
     joker:  ["pm","pm","off","off","am","am","am","am","off","off","pm","pm"]
   };
-  var START_DATE = new Date(2026,8,20); // 2026-09-20
-  var MIN_MONTH = new Date(2026,8,1);   // 2026-09 이전으로는 못 감
+  var START_DATE = new Date(2026,8,20);
+  var MIN_MONTH = new Date(2026,8,1);
 
   function pad2(n){ return n<10 ? "0"+n : ""+n; }
   function fmt(d){ return d.getFullYear()+"-"+pad2(d.getMonth()+1)+"-"+pad2(d.getDate()); }
@@ -306,9 +297,7 @@
   function diffDays(a,b){ return Math.round((b-a)/86400000); }
 
   function getStatus(date, person){
-    // 매월 1~5일은 전 근무자 출근(공백 처리) — 6일부터 원래 흐름 그대로 이어짐
     if(date.getDate() <= 5) return null;
-
     var key = fmt(date);
     if(HARD[key]) return HARD[key][person];
     if(date < START_DATE) return null;
@@ -326,14 +315,13 @@
   ];
 
   var LABEL = {am:"0~12시", pm:"12~24시", off:"휴무"};
+  var LABEL_SHORT = {am:"0~12", pm:"12~24", off:"휴무"};
 
-  // ---------- 상태 ----------
   var view = "all";
   var minePerson = "max";
-  var cursor = new Date(2026,8,1); // 표시중인 달 (2026-09)
+  var cursor = new Date(2026,8,1);
   var today = new Date();
 
-  // ---------- 렌더 ----------
   var grid = document.getElementById("calendarGrid");
   var monthLabel = document.getElementById("monthLabel");
   var prevBtn = document.getElementById("prevMonth");
@@ -347,6 +335,8 @@
 
   function renderCalendar(){
     grid.innerHTML = "";
+    grid.classList.toggle("mode-all", view === "all");
+    grid.classList.toggle("mode-mine", view !== "all");
     var y = cursor.getFullYear(), m = cursor.getMonth();
     var firstDow = new Date(y,m,1).getDay();
     var daysInMonth = new Date(y,m+1,0).getDate();
@@ -381,7 +371,7 @@
           hasAny = true;
           var row = document.createElement("div");
           row.className = "prow " + st;
-          row.innerHTML = '<span class="init">'+p.initial+'</span>';
+          row.innerHTML = '<span class="init">'+p.initial+'</span><span class="time">'+LABEL_SHORT[st]+'</span>';
           rows.appendChild(row);
         });
         if(!hasAny) cell.classList.add("empty");
@@ -408,7 +398,6 @@
     renderCalendar();
   }
 
-  // ---------- 이벤트 ----------
   document.querySelectorAll(".tab").forEach(function(btn){
     btn.addEventListener("click", function(){
       document.querySelectorAll(".tab").forEach(function(b){ b.classList.remove("active"); });
