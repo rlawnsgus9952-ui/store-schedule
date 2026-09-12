@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <title>매장 근무표</title>
 
-<!-- iOS 홈화면 추가 대응 -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="근무표">
@@ -20,7 +19,6 @@
     --surface:#141A22;
     --surface-2:#1B222C;
     --line: rgba(255,255,255,.07);
-    --line-strong: rgba(255,255,255,.14);
     --text:#E7EAF0;
     --muted:#7C8695;
     --faint:#454E5C;
@@ -71,7 +69,7 @@
   }
   .tab{
     flex:1; border:0; background:transparent; color:var(--muted);
-    font-size:14px; font-weight:700; padding:9px 0; border-radius:9px;
+    font-size:13.5px; font-weight:700; padding:9px 0; border-radius:9px;
     font-family:inherit; cursor:pointer; transition:background .15s, color .15s;
   }
   .tab.active{ background:var(--surface-2); color:var(--text); }
@@ -84,10 +82,8 @@
     font-family:inherit; border-radius:12px; padding:10px 6px;
     border:1.5px solid var(--line); background:var(--surface);
     color:var(--text); cursor:pointer; text-align:center;
-    display:flex; flex-direction:column; gap:2px; align-items:center;
   }
   .person-picker button .en{ font-size:13.5px; font-weight:800; letter-spacing:.01em; }
-  .person-picker button .kr{ font-size:11px; color:var(--muted); }
   .person-picker button[data-active="true"]{ background:var(--surface-2); }
   .person-picker button[data-person="max"][data-active="true"]{ border-color:var(--max); }
   .person-picker button[data-person="joker"][data-active="true"]{ border-color:var(--joker); }
@@ -106,9 +102,7 @@
     cursor:pointer; display:flex; align-items:center; justify-content:center;
   }
   .month-nav button:disabled{ opacity:.3; }
-  #monthLabel{
-    font-size:16.5px; font-weight:800; font-variant-numeric:tabular-nums;
-  }
+  #monthLabel{ font-size:16.5px; font-weight:800; font-variant-numeric:tabular-nums; }
 
   .legend{ display:flex; gap:14px; font-size:11.5px; color:var(--muted); padding:0 2px; }
   .legend span{ display:flex; align-items:center; gap:5px; }
@@ -150,20 +144,14 @@
   .day.empty .date-num{ color:var(--faint); }
   .day.today{ border-color: var(--am); }
 
-  .date-num{
-    font-size:11.5px; font-weight:700; color:var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
+  .date-num{ font-size:11.5px; font-weight:700; color:var(--muted); font-variant-numeric: tabular-nums; }
   .day.pad .rows, .day.empty .rows{ display:none; }
 
   .rows{ display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
   .prow{
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    border-radius:6px;
+    border-radius:6px; overflow:hidden; min-width:0; flex:1; line-height:1.05;
     font-variant-numeric: tabular-nums;
-    overflow:hidden; min-width:0;
-    flex:1;
-    line-height:1.05;
   }
   .prow .init{ font-size:11.5px; font-weight:800; }
   .prow .time{ font-size:7px; font-weight:700; opacity:.82; white-space:nowrap; }
@@ -178,17 +166,13 @@
   .day.mine-am .date-num{ color:var(--am-ink); }
   .day.mine-pm .date-num{ color:var(--pm-ink); }
   .day.mine-off .date-num{ color:#FFE1E1; }
-  .mine-label{
-    font-size:9.5px; font-weight:800; margin-top:auto;
-    line-height:1.15;
-  }
+  .mine-label{ font-size:9.5px; font-weight:800; margin-top:auto; line-height:1.15; }
   .day.mine-am .mine-label{ color:var(--am-ink); }
   .day.mine-pm .mine-label{ color:var(--pm-ink); }
   .day.mine-off .mine-label{ color:#FFE1E1; }
 
-  .note{
-    font-size:12px; color:var(--muted); text-align:center; padding:2px 8px;
-  }
+  .note{ font-size:12px; color:var(--muted); text-align:center; padding:2px 8px; }
+
   details.install-tip{
     background:var(--surface); border:1px solid var(--line);
     border-radius:14px; padding:12px 14px; margin-top:2px;
@@ -222,35 +206,37 @@
     </div>
   </header>
 
-  <div class="month-nav">
-    <button id="prevMonth" aria-label="이전 달">‹</button>
-    <div id="monthLabel">2026년 9월</div>
-    <button id="nextMonth" aria-label="다음 달">›</button>
+  <div id="calendarView">
+    <div class="month-nav">
+      <button id="prevMonth" aria-label="이전 달">‹</button>
+      <div id="monthLabel">2026년 9월</div>
+      <button id="nextMonth" aria-label="다음 달">›</button>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot am"></i>0~12시</span>
+      <span><i class="dot pm"></i>12~24시</span>
+      <span><i class="dot off"></i>휴무</span>
+    </div>
+
+    <div class="weekdays">
+      <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+    </div>
+
+    <div id="calendarGrid" class="calendar"></div>
+
+    <p class="note">9월 20일부터 4근무·2휴무 패턴이 계속 반복돼요<br>매월 1~5일은 전 근무자 출근일이라 공백으로 표시돼요</p>
+
+    <details class="install-tip">
+      <summary>아이폰 홈 화면에 추가하기</summary>
+      <ol>
+        <li>이 페이지를 <b>Safari</b>로 열어주세요 (다른 브라우저는 지원 안 함)</li>
+        <li>하단 <b>공유 버튼</b>(사각형에서 위로 화살표) 탭</li>
+        <li><b>"홈 화면에 추가"</b> 선택 후 <b>추가</b> 탭</li>
+        <li>홈 화면 아이콘을 누르면 바로 이 근무표가 열려요</li>
+      </ol>
+    </details>
   </div>
-
-  <div class="legend">
-    <span><i class="dot am"></i>0~12시</span>
-    <span><i class="dot pm"></i>12~24시</span>
-    <span><i class="dot off"></i>휴무</span>
-  </div>
-
-  <div class="weekdays">
-    <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
-  </div>
-
-  <div id="calendarGrid" class="calendar"></div>
-
-  <p class="note">9월 20일부터 4근무·2휴무 패턴이 계속 반복돼요<br>매월 1~5일은 전 근무자 출근일이라 공백으로 표시돼요</p>
-
-  <details class="install-tip">
-    <summary>아이폰 홈 화면에 추가하기</summary>
-    <ol>
-      <li>이 페이지를 <b>Safari</b>로 열어주세요 (다른 브라우저는 지원 안 함)</li>
-      <li>하단 <b>공유 버튼</b>(사각형에서 위로 화살표) 탭</li>
-      <li><b>"홈 화면에 추가"</b> 선택 후 <b>추가</b> 탭</li>
-      <li>홈 화면 아이콘을 누르면 바로 이 근무표가 열려요</li>
-    </ol>
-  </details>
 
 </div>
 
@@ -270,12 +256,11 @@
     "2026-09-28":{peanut:"off",max:"pm",joker:"am"},
     "2026-09-29":{peanut:"off",max:"pm",joker:"am"},
     "2026-09-30":{peanut:"pm",max:"off",joker:"am"},
-    "2026-10-01":{peanut:"off",max:"off",joker:"off"},
-    "2026-10-02":{peanut:"pm",max:"pm",joker:"am"},
-    "2026-10-03":{peanut:"pm",max:"pm",joker:"am"},
-    "2026-10-04":{peanut:"pm",max:"pm",joker:"am"},
-    "2026-10-05":{peanut:"pm",max:"pm",joker:"am"},
-    "2026-10-06":{peanut:"pm",max:"off",joker:"off"},
+    "2026-10-02":{peanut:"pm",max:"off",joker:"am"},
+    "2026-10-03":{peanut:"pm",max:"off",joker:"am"},
+    "2026-10-04":{peanut:"pm",max:"off",joker:"am"},
+    "2026-10-05":{peanut:"pm",max:"off",joker:"am"},
+    "2026-10-06":{peanut:"pm",max:"am",joker:"off"},
     "2026-10-07":{peanut:"pm",max:"am",joker:"off"},
     "2026-10-08":{peanut:"pm",max:"am",joker:"off"},
     "2026-10-09":{peanut:"off",max:"am",joker:"pm"},
@@ -298,6 +283,7 @@
 
   function getStatus(date, person){
     if(date.getDate() <= 5) return null;
+
     var key = fmt(date);
     if(HARD[key]) return HARD[key][person];
     if(date < START_DATE) return null;
@@ -309,9 +295,9 @@
   }
 
   var PEOPLE = [
-    {key:"max", initial:"M", en:"MAX"},
-    {key:"joker", initial:"J", en:"Joker"},
-    {key:"peanut", initial:"P", en:"Peanut"}
+    {key:"max", initial:"M"},
+    {key:"joker", initial:"J"},
+    {key:"peanut", initial:"P"}
   ];
 
   var LABEL = {am:"0~12시", pm:"12~24시", off:"휴무"};
