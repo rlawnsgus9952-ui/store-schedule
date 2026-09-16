@@ -244,35 +244,13 @@
 (function(){
   "use strict";
 
-  // 9/20 ~ 10/10 : 사진 원본 값 그대로. 다만 10/6의 조커(joker) 값만
-  // 원본의 겹침 오류(맥스와 조커가 같은 날 둘 다 휴무)를 없애기 위해
-  // 오전 근무 4일차를 채우도록 최소로 고쳤음 (그 외 날짜/사람 값은 사진과 동일).
-  var HARD = {
-    "2026-09-20":{peanut:"pm",max:"am",joker:"off"},
-    "2026-09-21":{peanut:"pm",max:"am",joker:"off"},
-    "2026-09-22":{peanut:"off",max:"am",joker:"pm"},
-    "2026-09-23":{peanut:"off",max:"am",joker:"pm"},
-    "2026-09-24":{peanut:"am",max:"off",joker:"pm"},
-    "2026-09-25":{peanut:"am",max:"off",joker:"pm"},
-    "2026-09-26":{peanut:"am",max:"pm",joker:"off"},
-    "2026-09-27":{peanut:"am",max:"pm",joker:"off"},
-    "2026-09-28":{peanut:"off",max:"pm",joker:"am"},
-    "2026-09-29":{peanut:"off",max:"pm",joker:"am"},
-    "2026-09-30":{peanut:"pm",max:"off",joker:"am"},
-    "2026-10-06":{peanut:"pm",max:"off",joker:"am"},
-    "2026-10-07":{peanut:"pm",max:"am",joker:"off"},
-    "2026-10-08":{peanut:"pm",max:"am",joker:"off"},
-    "2026-10-09":{peanut:"off",max:"am",joker:"pm"},
-    "2026-10-10":{peanut:"off",max:"am",joker:"pm"}
-  };
-
-  // 10/11부터는 확정된 "4근무-2휴무-4근무(반대타임)-2휴무" 12일 주기를 반복하되,
-  // 매월 1~5일(전원 출근일)은 로테이션에서 통째로 "얼려서"(카운트 제외) 건너뜀.
-  // 예: 9/30에 휴무 1일차였다면 10/1~5는 세지 않고 10/6에 휴무 2일차로 이어짐.
-  var ANCHOR = new Date(2026,9,11); // 2026-10-11
+  // 9/20을 기준(index 0)으로 "휴무2-근무4-휴무2-근무4(반대타임)" 12일 주기가
+  // 계속 반복됨. 매월 1~5일(전원 출근일)은 로테이션에서 통째로 "얼려서"
+  // (카운트 제외) 건너뛰고, 6일부터 멈췄던 지점 그대로 이어짐.
+  var ANCHOR = new Date(2026,8,20); // 2026-09-20
   var CYCLE = {
-    peanut: ["am","am","am","am","off","off","pm","pm","pm","pm","off","off"],
-    max:    ["off","off","pm","pm","pm","pm","off","off","am","am","am","am"],
+    peanut: ["off","off","pm","pm","pm","pm","off","off","am","am","am","am"],
+    max:    ["am","am","am","am","off","off","pm","pm","pm","pm","off","off"],
     joker:  ["pm","pm","off","off","am","am","am","am","off","off","pm","pm"]
   };
   var START_DATE = new Date(2026,8,20);
@@ -295,15 +273,10 @@
 
   function getStatus(date, person){
     if(date.getDate() <= 5) return null;
-
-    var key = fmt(date);
-    if(HARD[key]) return HARD[key][person];
     if(date < START_DATE) return null;
-    if(date >= ANCHOR){
-      var idx = ((compressedIndexFromAnchor(date) % 12) + 12) % 12;
-      return CYCLE[person][idx];
-    }
-    return null;
+
+    var idx = ((compressedIndexFromAnchor(date) % 12) + 12) % 12;
+    return CYCLE[person][idx];
   }
 
   var PEOPLE = [
